@@ -8,6 +8,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -15,10 +16,11 @@ import java.io.PrintWriter;
 public class AddOne extends HttpServlet {
     @EJB
     CounterBean cb;
-    @EJB
-    CounterStatefulBean cbStateful;
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws
             ServletException, IOException {
+        HttpSession session = req.getSession();
+        CounterStatefulBean cbStateful = (CounterStatefulBean)
+                session.getAttribute("statefulBean");
         PrintWriter out=resp.getWriter();
         out.println("The current count value of the SINGLETON Bean is: " + cb.getCounter());
         cb.addOneToCount();
@@ -33,4 +35,5 @@ public class AddOne extends HttpServlet {
     public AddOne(){
         super();
     }
+
 }
