@@ -6,7 +6,7 @@ import jakarta.ejb.Stateful;
 public class ProduitServiceStatefulBean implements ProduitLocal{
 
     private int idProduit= 4;
-    private String nomProduit = "Sourisatus";
+    private String nomProduit = "Souris";
 
     public String getNomProduit() {
         return nomProduit;
