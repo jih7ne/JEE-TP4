@@ -2,10 +2,11 @@ package com.tp4.services;
 
 import jakarta.ejb.LocalBean;
 import jakarta.ejb.Stateless;
+import com.tp4.services.ProduitLocal;
+import com.tp4.services.ProduitRemote;
 
 @Stateless
-@LocalBean
-public class ProduitService {
+public class ProduitService implements ProduitLocal, ProduitRemote {
 
     private int idProduit= 4;
     private String nomProduit = "Clavier";

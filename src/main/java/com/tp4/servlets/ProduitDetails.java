@@ -1,5 +1,7 @@
 package com.tp4.servlets;
 
+import com.tp4.services.ProduitLocal;
+import com.tp4.services.ProduitRemote;
 import com.tp4.services.ProduitService;
 import jakarta.ejb.EJB;
 import jakarta.servlet.ServletException;
@@ -17,33 +19,21 @@ import java.io.PrintWriter;
 import static java.lang.System.out;
 
 @WebServlet("/details")
-public class ProduitDetails extends HttpServlet {
+public class ProduitDetails extends HttpServlet{
     @EJB
-    private ProduitService produitService;
+    private ProduitLocal produitServiceLocal;
     @EJB
-    private ProduitService produitService2;
-    @EJB
-    private ProduitService produitService3;
-    @EJB
-    private ProduitService produitService4;
-    @EJB
-    private ProduitService produitService5;
-    @Override
+    private ProduitRemote produitServiceRemote;
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws
             ServletException, IOException {
         PrintWriter out=resp.getWriter();
-        out.println("ProduitService EJB is successfully injected");
-        produitService.setNomProduit("Souris");
-        out.println("Nom : " + produitService.getNomProduit());
-        produitService.setNomProduit("Clavier");
-        out.println("Nom : " + produitService2.getNomProduit());
-        produitService.setNomProduit("Ecran");
-        out.println("Nom : " + produitService3.getNomProduit());
-        produitService.setNomProduit("GPU");
-        out.println("Nom : " + produitService4.getNomProduit());
-        produitService.setNomProduit("RAM");
-        out.println("Nom : " + produitService5.getNomProduit());
-    }
-}
-
-
+        if(produitServiceLocal != null || produitServiceRemote != null) {
+            out.println("ProduitService EJB is successfully injected");
+            out.println("Product detail Local : " +
+                    produitServiceLocal.getNomProduit());
+            out.println("Product detail Remote : " +
+                    produitServiceRemote.getNomProduit());
+        }else{
+            out.println("Product service EJB is not injected");
+        }
+    }}
