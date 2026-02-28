@@ -20,19 +20,19 @@ import static java.lang.System.out;
 
 @WebServlet("/details")
 public class ProduitDetails extends HttpServlet{
-    @EJB
-    private ProduitLocal produitServiceLocal;
-    @EJB
-    private ProduitRemote produitServiceRemote;
+    @EJB(beanName = "ProduitStateful")
+    private ProduitLocal produitServiceStateful;
+    @EJB(beanName = "ProduitStateless")
+    private ProduitLocal produitServiceStateless;
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws
             ServletException, IOException {
         PrintWriter out=resp.getWriter();
-        if(produitServiceLocal != null || produitServiceRemote != null) {
+        if(produitServiceStateful != null || produitServiceStateless != null) {
             out.println("ProduitService EJB is successfully injected");
-            out.println("Product detail Local : " +
-                    produitServiceLocal.getNomProduit());
-            out.println("Product detail Remote : " +
-                    produitServiceRemote.getNomProduit());
+            out.println("Product detail Stateful : " +
+                    produitServiceStateful.getNomProduit());
+            out.println("Product detail Stateless : " +
+                    produitServiceStateless.getNomProduit());
         }else{
             out.println("Product service EJB is not injected");
         }

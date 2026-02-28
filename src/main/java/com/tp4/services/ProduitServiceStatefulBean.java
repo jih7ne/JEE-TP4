@@ -1,15 +1,12 @@
 package com.tp4.services;
 
-import jakarta.ejb.LocalBean;
-import jakarta.ejb.Stateless;
-import com.tp4.services.ProduitLocal;
-import com.tp4.services.ProduitRemote;
+import jakarta.ejb.Stateful;
 
-@Stateless (name = "ProduitStateless")
-public class ProduitService implements ProduitLocal{
+@Stateful (name = "ProduitStateful")
+public class ProduitServiceStatefulBean implements ProduitLocal{
 
     private int idProduit= 4;
-    private String nomProduit = "Clavier";
+    private String nomProduit = "Sourisatus";
 
     public String getNomProduit() {
         return nomProduit;
