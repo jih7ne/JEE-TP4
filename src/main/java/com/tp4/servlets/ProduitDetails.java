@@ -20,22 +20,29 @@ import static java.lang.System.out;
 public class ProduitDetails extends HttpServlet {
     @EJB
     private ProduitService produitService;
+    @EJB
+    private ProduitService produitService2;
+    @EJB
+    private ProduitService produitService3;
+    @EJB
+    private ProduitService produitService4;
+    @EJB
+    private ProduitService produitService5;
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws
             ServletException, IOException {
         PrintWriter out=resp.getWriter();
         out.println("ProduitService EJB is successfully injected");
         produitService.setNomProduit("Souris");
-        try {
-            Context context = new InitialContext();
-            Object fObj=
-                    context.lookup("java:global/demo-1.0-SNAPSHOT/ProduitService!com.tp4.services.ProduitService");
-
-            produitService= (ProduitService) fObj;
-        }catch(NamingException e) {
-            System.out.println("Naming Exception has occuredwhen trying to lookup the FlightServiceEJB");
-                    e.printStackTrace();
-        }
+        out.println("Nom : " + produitService.getNomProduit());
+        produitService.setNomProduit("Clavier");
+        out.println("Nom : " + produitService2.getNomProduit());
+        produitService.setNomProduit("Ecran");
+        out.println("Nom : " + produitService3.getNomProduit());
+        produitService.setNomProduit("GPU");
+        out.println("Nom : " + produitService4.getNomProduit());
+        produitService.setNomProduit("RAM");
+        out.println("Nom : " + produitService5.getNomProduit());
     }
 }
 
